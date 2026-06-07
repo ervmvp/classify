@@ -55,7 +55,7 @@ Route::prefix('student')->middleware(['auth'])->name('student.')->group(function
     Route::post('/classes/join', [StudentClassController::class, 'joinByCode'])->name('classes.join-code');
     Route::get('/classes/{classroom}', [StudentClassController::class, 'show'])->name('classes.show');
     Route::post('/classes/{classroom}/leave', [StudentClassController::class, 'leave'])->name('classes.leave');
-    
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/assignments/{assignment}/submit', [StudentSubmissionController::class, 'create'])->name('submissions.create');
     Route::post('/assignments/{assignment}/submit', [StudentSubmissionController::class, 'store'])->name('submissions.store');
     Route::get('/submissions/{submission}', [StudentSubmissionController::class, 'show'])->name('submissions.show');

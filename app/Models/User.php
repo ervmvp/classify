@@ -47,9 +47,7 @@ class User extends Authenticatable
     // Student relationships
     public function enrolledClasses(): BelongsToMany
     {
-        return $this->belongsToMany(ClassRoom::class, 'class_student', 'student_id', 'class_id')
-            ->withPivot('joined_at')
-            ->withTimestamps();
+        return $this->belongsToMany(ClassRoom::class, 'class_student');
     }
 
     public function submissions(): HasMany

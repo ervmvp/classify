@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                        📚 Classroom
+                        📚 Classify
                     </a>
                 </div>
 
@@ -41,7 +41,7 @@
                     <button @click="$root.$el.querySelector('html').classList.toggle('dark'); localStorage.setItem('darkMode', $root.$el.querySelector('html').classList.contains('dark'))"
                             class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
                         <span x-show="!document.documentElement.classList.contains('dark')">🌙</span>
-                        <span x-show="document.documentElement.classList.contains('dark')">☀️</span>
+                        <span x-show="document.documentElement.classList.contains('light')">☀️</span>
                     </button>
 
                     {{-- Role Badge --}}

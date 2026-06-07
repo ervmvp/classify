@@ -23,9 +23,8 @@ class ClassRoom extends Model
 
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'class_student', 'class_id', 'student_id')
-            ->withPivot('joined_at')
-            ->withTimestamps();
+         return $this->belongsToMany(Student::class, 'class_student')
+                ->withoutTimestamps();
     }
 
     public function assignments(): HasMany
@@ -37,10 +36,9 @@ class ClassRoom extends Model
     {
         return strtoupper(substr(md5(uniqid()), 0, 6));
     }
-
-    public function generateQrCode(): void
+    public function classes()
     {
-        // QR code will be generated in the controller
-        // This method is for reference
+         return $this->belongsToMany(ClassRoom::class, 'class_student')
+                ->withoutTimestamps();
     }
 }
