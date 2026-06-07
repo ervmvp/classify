@@ -38,10 +38,10 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
                 @auth
                     {{-- Dark Mode Toggle --}}
-                    <button @click="$root.$el.querySelector('html').classList.toggle('dark'); localStorage.setItem('darkMode', $root.$el.querySelector('html').classList.contains('dark'))"
+                    <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)"
                             class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                        <span x-show="!document.documentElement.classList.contains('dark')">🌙</span>
-                        <span x-show="document.documentElement.classList.contains('light')">☀️</span>
+                        <span x-show="!darkMode">🌙</span>
+                        <span x-show="darkMode">☀️</span>
                     </button>
 
                     {{-- Role Badge --}}
