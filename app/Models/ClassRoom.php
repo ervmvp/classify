@@ -23,13 +23,12 @@ class ClassRoom extends Model
 
     public function students(): BelongsToMany
     {
-         return $this->belongsToMany(Student::class, 'class_student')
-                ->withoutTimestamps();
+        return $this->belongsToMany(User::class, 'class_student', 'class_id', 'student_id');
     }
 
     public function assignments(): HasMany
     {
-        return $this->hasMany(Assignment::class);
+        return $this->hasMany(Assignment::class, 'class_id');
     }
 
     public function generateClassCode(): string

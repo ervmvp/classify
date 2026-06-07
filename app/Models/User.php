@@ -44,11 +44,10 @@ class User extends Authenticatable
         return $this->hasMany(Assignment::class, 'teacher_id');
     }
 
-    // Student relationships
     public function enrolledClasses(): BelongsToMany
     {
-        return $this->belongsToMany(ClassRoom::class, 'class_student');
-    }
+        return $this->belongsToMany(ClassRoom::class, 'class_student', 'student_id', 'class_id');
+    }   
 
     public function submissions(): HasMany
     {
