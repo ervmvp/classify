@@ -33,10 +33,10 @@ class ClassController extends Controller
 
         $classroom = ClassRoom::where('class_code', $validated['class_code'])->firstOrFail();
 
-        // // Check if already enrolled
-        // if (auth()->user()->enrolledClasses()->where('class_id', $classroom->id)->exists()) {
-        //     return back()->with('error', 'You are already enrolled in this class');
-        // }
+        // Check if already enrolled
+        if (auth()->user()->enrolledClasses()->where('class_id', $classroom->id)->exists()) {
+            return back()->with('error', 'You are already enrolled in this class');
+        }
 
         auth()->user()->enrolledClasses()->attach($classroom->id);
 
