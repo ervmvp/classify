@@ -10,9 +10,11 @@
             <p class="text-gray-600 dark:text-gray-400">{{ $classroom->description }}</p>
         </div>
         <div class="flex space-x-2">
+            <a href="{{ route('teacher.assignments.create', ['classroom_id' => $classroom->id]) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">New Assignment</a>
             <a href="{{ route('teacher.classes.edit', $classroom) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Edit</a>
             <a href="{{ route('teacher.classes.students', $classroom) }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Students</a>
         </div>
+        
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -41,13 +43,6 @@
             <img src="{{ Storage::url($classroom->qr_code_path) }}" alt="QR Code" class="w-48 h-48">
         </div>
     @endif
-
-    {{-- Create Assignment --}}
-    <div class="mb-8">
-        <a href="{{ route('teacher.assignments.create', ['classroom' => $classroom]) }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded inline-block">
-            + Create Assignment
-        </a>
-    </div>
 
     {{-- Assignments List --}}
     <h2 class="text-2xl font-bold mb-4">Assignments</h2>

@@ -18,15 +18,18 @@ class SubmissionController extends Controller
 
     public function show(Submission $submission)
     {
+        $submission->loadMissing('assignment', 'files');
         $this->authorize('grade', $submission);
+        $submission->loadMissing('assignment'); // Ensure assignment is loaded for the view
         $comments = $submission->comments()->with('user')->latest()->get();
         return view('teacher.submissions.show', compact('submission', 'comments'));
     }
 
     public function grade(Request $request, Submission $submission)
-    {
+    {   
+        $submission->loadMissing('assignment');
         $this->authorize('grade', $submission);
-
+        
         $validated = $request->validate([
             'grade' => 'required|integer|min:0|max:' . $submission->assignment->total_points,
         ]);
@@ -51,7 +54,8 @@ class SubmissionController extends Controller
     }
 
     public function comment(Request $request, Submission $submission)
-    {
+    {   
+        $submission->loadMissing('assignment');
         $this->authorize('grade', $submission);
 
         $validated = $request->validate([

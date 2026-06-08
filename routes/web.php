@@ -28,23 +28,23 @@ Route::middleware('auth')->group(function () {
 // Admin Routes
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::resource('users', AdminUserController::class);
-    
+
     Route::prefix('audit-logs')->name('audit-logs.')->group(function () {
         Route::get('/', [AuditLogController::class, 'index'])->name('index');
-        Route::get('/{auditLog}', [AuditLogController::class, 'show'])->name('show');
         Route::get('/export', [AuditLogController::class, 'export'])->name('export');
+        Route::get('/{auditLog}', [AuditLogController::class, 'show'])->name('show');
     });
 });
 
 // Teacher Routes
 Route::prefix('teacher')->middleware(['auth', 'teacher'])->name('teacher.')->group(function () {
-    Route::resource('classes', TeacherClassController::class);
+    Route::resource('classes', TeacherClassController::class)->parameters(['classes' => 'classroom']);
     Route::get('/classes/{classroom}/students', [TeacherClassController::class, 'students'])->name('classes.students');
     Route::delete('/classes/{classroom}/students/{student}', [TeacherClassController::class, 'removeStudent'])->name('classes.remove-student');
-    
+
     Route::resource('assignments', AssignmentController::class);
-    Route::post('/assignments/{assignment}/grade', [TeacherSubmissionController::class, 'grade'])->name('submissions.grade');
     Route::get('/submissions/{submission}', [TeacherSubmissionController::class, 'show'])->name('submissions.show');
+    Route::post('/assignments/{submission}/grade', [TeacherSubmissionController::class, 'grade'])->name('submissions.grade');
     Route::post('/submissions/{submission}/comment', [TeacherSubmissionController::class, 'comment'])->name('submissions.comment');
 });
 

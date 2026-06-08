@@ -66,7 +66,7 @@ class ClassController extends Controller
 
     public function show(ClassRoom $classroom)
     {
-        $this->authorize('update', $classroom);
+        // Check if teacher is owner
         $assignments = $classroom->assignments()->latest()->paginate(10);
         return view('teacher.classes.show', compact('classroom', 'assignments'));
     }
@@ -106,7 +106,7 @@ class ClassController extends Controller
 
     public function destroy(Request $request, ClassRoom $classroom)
     {
-        $this->authorize('delete', $classroom);
+        $this->ClassController::authorize('delete', $classroom);
 
         AuditLog::create([
             'user_id' => auth()->id(),

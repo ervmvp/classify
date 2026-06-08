@@ -22,13 +22,14 @@
                     </div>
                 @endif
 
-                @if($submission->files()->exists())
+                @if($submission->files->count())
                     <div class="mb-6">
                         <h3 class="font-semibold mb-3">Student Files:</h3>
                         <ul class="space-y-2">
-                            @foreach($submission->files() as $file)
+                            @foreach($submission->files as $file)
                                 <li>
-                                    <a href="{{ Storage::url($file->file_path) }}" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 flex items-center">
+                                    <a href="{{ Storage::url($file->file_path) }}" target="_blank"
+                                    class="text-blue-600 hover:text-blue-700 dark:text-blue-400 flex items-center">
                                         📎 {{ $file->file_name }}
                                     </a>
                                 </li>

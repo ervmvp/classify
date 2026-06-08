@@ -7,9 +7,9 @@
     <h1 class="text-3xl font-bold mb-6">Create Assignment</h1>
     <p class="text-gray-600 dark:text-gray-400 mb-6">{{ $classroom->name }}</p>
 
-    <form action="{{ route('teacher.assignments.store', $classroom) }}" method="POST" enctype="multipart/form-data" class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+    <form action="{{ route('teacher.assignments.store') }}" method="POST" enctype="multipart/form-data" class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         @csrf
-
+        <input type="hidden" name="classroom_id" value="{{ $classroom->id }}">
         <div class="mb-6">
             <label for="title" class="block text-sm font-medium mb-2">Assignment Title *</label>
             <input type="text" id="title" name="title" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700" value="{{ old('title') }}">
@@ -52,7 +52,7 @@
                 <p class="text-red-600 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
-
+        
         <div class="mt-8 flex space-x-4">
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
                 Create Assignment

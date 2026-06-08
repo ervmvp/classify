@@ -80,6 +80,10 @@ class SubmissionController extends Controller
             abort(403, 'Unauthorized');
         }
 
+        $submission->loadMissing('files');
+        $submission->loadMissing('assignment'); // Ensure assignment is loaded for the view
+        $comments = $submission->comments()->with('user')->latest()->get();
+        return view('student.submissions.show', compact('submission', 'comments'));
         $comments = $submission->comments()->with('user')->latest()->get();
         return view('student.submissions.show', compact('submission', 'comments'));
     }

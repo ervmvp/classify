@@ -3,6 +3,23 @@
 @section('title', 'Grade Submissions')
 
 @section('content')
+{{-- Assignment Files --}}
+@if($assignment->files->count())
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+    <h2 class="text-lg font-semibold mb-3">Assignment Files</h2>
+    <ul class="space-y-2">
+        @foreach($assignment->files as $file)
+            <li class="flex items-center gap-3">
+                <a href="{{ Storage::url($file->file_path) }}" target="_blank"
+                   class="text-blue-600 hover:underline dark:text-blue-400">
+                    {{ $file->file_name }}
+                </a>
+                <span class="text-xs text-gray-500">({{ number_format($file->file_size / 1024, 1) }} KB)</span>
+            </li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="py-8">
     <div class="flex justify-between items-center mb-6">
         <div>

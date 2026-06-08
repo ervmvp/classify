@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Submission extends Model
 {
     use HasFactory;
+    protected $with = ['assignment'];
 
     protected $casts = [
         'submitted_at' => 'datetime',

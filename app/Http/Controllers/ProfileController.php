@@ -52,7 +52,7 @@ class ProfileController extends Controller
                 \Storage::disk('public')->delete($request->user()->profile_picture);
             }
 
-            $path = $request->file('profile_picture')->store('profile-pictures', 'public');
+            $path = $request->file('profile_picture')->store('profile_pictures', 'public');
             $request->user()->update(['profile_picture' => $path]);
         }
 
